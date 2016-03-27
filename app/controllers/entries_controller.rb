@@ -1,5 +1,6 @@
 class EntriesController < ApplicationController
-  before_action :set_entry, only: [:show, :edit, :update, :destroy]
+  before_action :set_entry, only: [:show]
+  before_action :set_authors_entry, only: [:edit, :update, :destroy]
   before_action :authenticate_author!, except: [:index, :show]
 
   # GET /entries
@@ -26,6 +27,7 @@ class EntriesController < ApplicationController
   # POST /entries.json
   def create
     @entry = Entry.new(entry_params)
+    @entry.author = current_author
 
     respond_to do |format|
       if @entry.save
@@ -68,8 +70,12 @@ class EntriesController < ApplicationController
       @entry = Entry.find(params[:id])
     end
 
+    def set_authors_entry
+      @entry = current_author.entries.find(params[:id])
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def entry_params
-      params.require(:entry).permit(:title, :author_id, :body)
+      params.require(:entry).permit(:title, :body)
     end
 end
