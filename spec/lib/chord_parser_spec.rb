@@ -9,12 +9,12 @@ describe ChordParser do
     it do
       expect(subject).to eq([
         {
-          name: 'Intro',
-          chords: %w{GbM7(9) F7(#9) Bbm7(9) AonB}
+          title: 'Intro',
+          measures: [['GbM7(9)'], ['F7(#9)'], ['Bbm7(9)'], ['Db9']]
         },
         {
-          name: 'A melody',
-          chords: %w{Bbm7(11) Bbm7(11) Bm7(11) Bm7(11)}
+          title: 'A melody',
+          measures: [['Bbm7(11)'], ['Bbm7(11)'], ['Bm7(11)'], ['Bm7(11)']]
         },
       ])
     end
