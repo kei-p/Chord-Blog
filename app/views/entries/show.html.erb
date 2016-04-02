@@ -10,10 +10,7 @@
   <%= @entry.author_id %>
 </p>
 
-<p>
-  <strong>Body:</strong>
-  <%= @entry.body %>
-</p>
+<%= render 'chord_body' %>
 
 <% if author_signed_in? %>
   <%= link_to 'Edit', edit_entry_path(@entry) %>

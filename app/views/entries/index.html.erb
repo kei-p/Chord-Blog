@@ -17,7 +17,6 @@
       <tr>
         <td><%= entry.title %></td>
         <td><%= entry.author_id %></td>
-        <td><%= entry.body %></td>
         <td><%= link_to 'Show', entry %></td>
         <% if author_signed_in? && entry.author?(current_author) %>
           <td><%= link_to 'Edit', edit_entry_path(entry) %></td>
