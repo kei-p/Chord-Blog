@@ -1,13 +1,13 @@
 <p>
   <strong>Body:</strong>
-  <% @entry.chord_body.each do |section| %>
+  <% @entry.chord_body.sections.each do |section| %>
     <div>
-      <p><%= section[:title] %></p>
+      <p><%= section.title %></p>
       <div>
-        <% section[:measures].each do |measure|%>
+        <% section.measures.each do |measure|%>
           <span>
             <% measure.each do |chord| %>
-              <span><%= chord %></span>
+              <span><%= chord.name %></span>
             <% end %>
           </span>
         <% end %>

@@ -7,7 +7,7 @@ class Entry < ActiveRecord::Base
 
   def chord_body
     @chord_body ||= begin
-      ChordParser.new(body).parse
+      ChordBody.new(body)
     end
   end
 end
