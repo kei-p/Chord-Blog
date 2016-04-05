@@ -1,0 +1,10 @@
+%p
+  %strong Body:
+  - @entry.chord_body.sections.each do |section|
+    %div
+      %p= section.title
+      %div
+        - section.measures.each do |measure|
+          %span
+            - measure.each do |chord|
+              %span= chord.name
