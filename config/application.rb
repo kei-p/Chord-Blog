@@ -25,6 +25,7 @@ module ChordBlog
 
     config.autoload_paths += %W(#{config.root}/lib)
     config.autoload_paths += %W(#{config.root}/app/values)
+    config.autoload_paths += %W(#{config.root}/app/decorators)
   end
 end
 

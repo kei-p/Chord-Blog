@@ -9,4 +9,8 @@ class Section
   def add_measure(measure)
     @measures << measure
   end
+
+  def flatten_chords
+    measures.flatten
+  end
 end

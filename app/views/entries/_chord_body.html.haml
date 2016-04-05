@@ -1,6 +1,7 @@
 %p
   %strong Body:
   - @entry.chord_body.sections.each do |section|
+    - section = SectionDecorator.new(section)
     %div
       %p= section.title
       %div
@@ -8,4 +9,4 @@
           %span
             - measure.each do |chord|
               %span= chord.name
-              %span= chord.sounds
+    = section.player
