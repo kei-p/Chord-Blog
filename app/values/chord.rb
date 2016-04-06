@@ -8,8 +8,8 @@ class Chord
     end
   end
 
-  def initialize(name)
+  def initialize(name:, sounds:)
     @name = name
-    @sounds = self.class.chord_sounds[@name]
+    @sounds = sounds || self.class.chord_sounds[@name]
   end
 end

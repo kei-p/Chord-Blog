@@ -6,17 +6,27 @@ describe ChordParser do
 
   describe '#parse' do
     subject { parser.parse }
-    it do
-      expect(subject).to eq([
-        {
-          title: 'Intro',
-          measures: [['GbM7(9)'], ['F7(#9)'], ['Bbm7(9)'], ['Db9']]
-        },
-        {
-          title: 'A melody',
-          measures: [['Bbm7(11)'], ['Bbm7(11)'], ['Bm7(11)'], ['Bm7(11)']]
-        },
-      ])
+
+    context 'simple' do
+      let(:text) { FactoryGirl.attributes_for(:entry)[:body] }
+      it do
+        expect(subject[0][:title]).to eq('Intro')
+        expect(subject[0][:measures][0][0][:name]).to eq('GbM7(9)')
+        expect(subject[0][:measures][0][0][:sounds]).to eq(nil)
+        expect(subject[1][:title]).to eq('A melody')
+      end
+    end
+
+    context 'with sounds' do
+      let(:text) { FactoryGirl.attributes_for(:entry, :with_sounds)[:body] }
+      it do
+        p text
+        p subject
+        expect(subject[0][:title]).to eq('Intro')
+        expect(subject[0][:measures][0][0][:name]).to eq('GbM7(9)')
+        expect(subject[0][:measures][0][0][:sounds]).to eq('3n3324')
+        expect(subject[1][:title]).to eq('A melody')
+      end
     end
   end
 end

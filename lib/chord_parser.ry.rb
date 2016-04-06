@@ -37,7 +37,9 @@ rule
               { val[0] << val[1] }
 
   chord     : ws CHORD ws
-              { val[1] }
+              { { name: val[1], sounds: nil } }
+            | chord ws SOUNDS ws
+              { val[0][:sounds] = val[2]; val[0] }
 end
 
 ---- header
@@ -50,6 +52,7 @@ R_SEPARATOR  = /\A\|/
 R_SPACE      = /\A[ ]+/
 R_BREAKLINE  = /\A\n/
 R_CHORD      = /\A[A-Ga-g][b#]?[Mm769]*(\([#b\d]+\))?/
+R_SOUNDS     = /\A{([0-9a-cn]{6})}/
 R_TITLE      = /\A([^:\n\r]+):\n/
 
 attr_reader :src
@@ -77,6 +80,9 @@ def parse
       @q << [:BREAKLINE, piece]
     elsif (piece = @s.scan R_CHORD)
       @q << [:CHORD, piece]
+    elsif (piece = @s.scan R_SOUNDS)
+      m = piece.match(R_SOUNDS)
+      @q << [:SOUNDS, m[1]]
     else
       raise "Error at #{@s.pos} \"#{src[@s.pos]}\""
     end

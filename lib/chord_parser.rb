@@ -11,12 +11,13 @@ require 'strscan'
 
 class ChordParser < Racc::Parser
 
-module_eval(<<'...end chord_parser.ry.rb/module_eval...', 'chord_parser.ry.rb', 48)
+module_eval(<<'...end chord_parser.ry.rb/module_eval...', 'chord_parser.ry.rb', 50)
 
 R_SEPARATOR  = /\A\|/
 R_SPACE      = /\A[ ]+/
 R_BREAKLINE  = /\A\n/
 R_CHORD      = /\A[A-Ga-g][b#]?[Mm769]*(\([#b\d]+\))?/
+R_SOUNDS     = /\A{([0-9a-cn]{6})}/
 R_TITLE      = /\A([^:\n\r]+):\n/
 
 attr_reader :src
@@ -44,6 +45,9 @@ def parse
       @q << [:BREAKLINE, piece]
     elsif (piece = @s.scan R_CHORD)
       @q << [:CHORD, piece]
+    elsif (piece = @s.scan R_SOUNDS)
+      m = piece.match(R_SOUNDS)
+      @q << [:SOUNDS, m[1]]
     else
       raise "Error at #{@s.pos} \"#{src[@s.pos]}\""
     end
@@ -59,35 +63,41 @@ end
 ##### State transition tables begin ###
 
 racc_action_table = [
-    -9,     5,    13,    13,    27,    -9,    14,    14,    13,    20,
-    21,   -11,   -11,   -12,   -12,   -13,   -13,    13,    12,     5,
-     6,    13,    13,    13 ]
+    -2,    -9,    -2,    13,     5,    -2,    -9,    -2,    26,    13,
+    13,    29,    13,    14,    14,    13,    21,    22,   -13,   -13,
+   -12,   -12,   -11,   -11,    12,     5,     6,    13,    13,    13,
+    13 ]
 
 racc_action_check = [
-    16,     0,     8,    22,    22,    16,     8,    22,    15,    15,
-    15,    10,    10,    24,    24,    23,    23,    19,     6,     2,
-     1,    25,    26,    28 ]
+    18,    16,    11,    19,     0,    18,    16,    11,    19,     8,
+    23,    23,    20,     8,    23,    15,    15,    15,    24,    24,
+    25,    25,    10,    10,     6,     2,     1,    27,    28,    30,
+    31 ]
 
 racc_action_pointer = [
-    -4,    20,    14,   nil,   nil,   nil,    18,   nil,     0,   nil,
-     8,   nil,   nil,   nil,   nil,     6,     0,   nil,   nil,    15,
-   nil,   nil,     1,    12,    10,    19,    20,   nil,    21 ]
+    -1,    26,    20,   nil,   nil,   nil,    24,   nil,     7,   nil,
+    19,     0,   nil,   nil,   nil,    13,     1,   nil,    -2,     1,
+    10,   nil,   nil,     8,    15,    17,   nil,    25,    26,   nil,
+    27,    28 ]
 
 racc_action_default = [
-   -17,   -17,    -1,    -6,    -2,   -10,   -17,    -7,   -17,    -2,
-    -2,   -14,    29,    -3,    -2,   -17,    -2,    -2,   -15,   -16,
-    -2,    -2,   -17,    -2,    -2,    -4,    -8,    -2,    -5 ]
+   -18,   -18,    -1,    -6,    -2,   -10,   -18,    -7,   -18,    -2,
+    -2,   -14,    32,    -3,    -2,   -18,    -2,    -2,   -15,   -18,
+   -16,    -2,    -2,   -18,    -2,    -2,    -2,    -4,    -8,    -2,
+   -17,    -5 ]
 
 racc_goto_table = [
-    15,    18,    16,    17,    10,    19,     3,    22,     7,     9,
-     2,    25,    26,     1,    18,    18,    23,    24,    28 ]
+    15,    18,    19,    16,    17,    20,    10,    23,     3,    19,
+     7,     9,    27,    28,     2,    18,    18,    30,    24,    25,
+    31,     1 ]
 
 racc_goto_check = [
-     3,    10,     4,     6,     9,     3,     5,     3,     5,     8,
-     2,     3,     3,     1,    10,    10,     9,     9,     3 ]
+     3,    10,     3,     4,     6,     3,     9,     3,     5,     3,
+     5,     8,     3,     3,     2,    10,    10,     3,     9,     9,
+     3,     1 ]
 
 racc_goto_pointer = [
-   nil,    13,    10,    -9,    -7,     6,    -6,   nil,     5,     0,
+   nil,    21,    14,    -9,    -6,     8,    -5,   nil,     7,     2,
     -9 ]
 
 racc_goto_default = [
@@ -96,26 +106,27 @@ racc_goto_default = [
 
 racc_reduce_table = [
   0, 0, :racc_error,
-  1, 8, :_reduce_1,
-  0, 10, :_reduce_none,
-  2, 10, :_reduce_none,
-  3, 11, :_reduce_none,
-  4, 11, :_reduce_none,
-  1, 9, :_reduce_6,
-  2, 9, :_reduce_7,
-  3, 13, :_reduce_none,
-  3, 12, :_reduce_9,
-  1, 14, :_reduce_10,
-  1, 15, :_reduce_11,
-  3, 15, :_reduce_12,
-  3, 15, :_reduce_13,
-  1, 16, :_reduce_14,
-  2, 16, :_reduce_15,
-  3, 17, :_reduce_16 ]
+  1, 9, :_reduce_1,
+  0, 11, :_reduce_none,
+  2, 11, :_reduce_none,
+  3, 12, :_reduce_none,
+  4, 12, :_reduce_none,
+  1, 10, :_reduce_6,
+  2, 10, :_reduce_7,
+  3, 14, :_reduce_none,
+  3, 13, :_reduce_9,
+  1, 15, :_reduce_10,
+  1, 16, :_reduce_11,
+  3, 16, :_reduce_12,
+  3, 16, :_reduce_13,
+  1, 17, :_reduce_14,
+  2, 17, :_reduce_15,
+  3, 18, :_reduce_16,
+  4, 18, :_reduce_17 ]
 
-racc_reduce_n = 17
+racc_reduce_n = 18
 
-racc_shift_n = 29
+racc_shift_n = 32
 
 racc_token_table = {
   false => 0,
@@ -124,9 +135,10 @@ racc_token_table = {
   :BREAKLINE => 3,
   :SEPARATOR => 4,
   :TITLE => 5,
-  :CHORD => 6 }
+  :CHORD => 6,
+  :SOUNDS => 7 }
 
-racc_nt_base = 7
+racc_nt_base = 8
 
 racc_use_result_var = false
 
@@ -154,6 +166,7 @@ Racc_token_to_s_table = [
   "SEPARATOR",
   "TITLE",
   "CHORD",
+  "SOUNDS",
   "$start",
   "body",
   "sections",
@@ -244,7 +257,13 @@ module_eval(<<'.,.,', 'chord_parser.ry.rb', 36)
 
 module_eval(<<'.,.,', 'chord_parser.ry.rb', 39)
   def _reduce_16(val, _values)
-     val[1] 
+     { name: val[1], sounds: nil } 
+  end
+.,.,
+
+module_eval(<<'.,.,', 'chord_parser.ry.rb', 41)
+  def _reduce_17(val, _values)
+     val[0][:sounds] = val[2]; val[0] 
   end
 .,.,
 
