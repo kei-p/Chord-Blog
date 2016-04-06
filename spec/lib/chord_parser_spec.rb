@@ -40,8 +40,6 @@ describe ChordParser do
     context 'with sounds' do
       let(:text) { FactoryGirl.attributes_for(:entry, :with_sounds)[:body] }
       it do
-        p text
-        p subject
         expect(subject[0][:title]).to eq('Intro')
         expect(subject[0][:measures][0][0][:name]).to eq('GbM7(9)')
         expect(subject[0][:measures][0][0][:sounds]).to eq('3n3324')
