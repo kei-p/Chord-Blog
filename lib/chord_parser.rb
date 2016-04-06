@@ -15,10 +15,10 @@ module_eval(<<'...end chord_parser.ry.rb/module_eval...', 'chord_parser.ry.rb', 
 
 R_SEPARATOR  = /\A\|/
 R_SPACE      = /\A[ ]+/
-R_BREAKLINE  = /\A\n/
+R_BREAKLINE  = /\A(\r\n|\r|\n)/
 R_CHORD      = /\A[A-Ga-g][b#]?[Mm769]*(\([#b\d]+\))?/
 R_SOUNDS     = /\A{([0-9a-cn]{6})}/
-R_TITLE      = /\A([^:\n\r]+):\n/
+R_TITLE      = /\A([^:\n\r]+):(\r\n|\r|\n)/
 
 attr_reader :src
 attr_reader :q
