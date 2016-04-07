@@ -1,12 +1,10 @@
-%p
-  %strong Body:
-  - @entry.chord_body.sections.each do |section|
-    - section = SectionDecorator.new(section)
+- @entry.chord_body.sections.each do |section|
+  - section = SectionDecorator.new(section)
+  %div
+    %p= section.title
     %div
-      %p= section.title
-      %div
-        - section.measures.each do |measure|
-          %span
-            - measure.each do |chord|
-              %span= chord.name
-    = section.player
+      - section.measures.each do |measure|
+        %span
+          - measure.each do |chord|
+            %span= chord.name
+  = section.player
