@@ -17,6 +17,7 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'devise'
 
 gem 'haml'
+gem 'erb2haml'
 
 gem 'draper'
 
