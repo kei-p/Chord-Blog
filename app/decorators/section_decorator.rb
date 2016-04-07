@@ -27,7 +27,8 @@ class SectionDecorator < Draper::Decorator
   def iframe_sounds
     flatten_chords.map.with_index do |c, i|
       num = i+1
-      "n#{num}=#{CGI.escape(c.name)}&f#{num}=#{c.sounds.reverse}"
+      sounds = c.sounds || 'n' * 6
+      "n#{num}=#{CGI.escape(c.name)}&f#{num}=#{sounds.reverse}"
     end.join('&')
   end
 
