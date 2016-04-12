@@ -15,6 +15,7 @@ gem 'coffee-rails', '~> 4.1.0'
 # gem 'therubyracer', platforms: :ruby
 
 gem 'devise'
+gem 'omniauth-twitter'
 
 gem 'haml'
 gem 'erb2haml'
