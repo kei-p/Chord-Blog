@@ -17,8 +17,13 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'devise'
 
 gem 'haml'
+gem 'erb2haml'
 
 gem 'draper'
+
+gem 'therubyracer'
+gem 'less-rails'
+gem 'twitter-bootstrap-rails'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
