@@ -8,6 +8,10 @@
     = csrf_meta_tags
   %body
     - if author_signed_in?
-      %p.btn.btn-danger= link_to "Log out", destroy_author_session_path, method: :delete
+      %div.pull-right
+        = "Logged in as "
+        %strong= current_author.name
+        %p.btn.btn-default= link_to "Edit Profile", edit_author_registration_path
+        %p.btn.btn-danger= link_to "Log out", destroy_author_session_path, method: :delete
     %p.alert= alert
     = yield
