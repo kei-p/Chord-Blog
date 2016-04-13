@@ -29,6 +29,14 @@ class Author < ActiveRecord::Base
     super && provider.blank?
   end
 
+  def email_required?
+    false
+  end
+
+  def email_changed?
+    false
+  end
+
   def update_with_password(params, *options)
     if encrypted_password.blank?
       update_attributes(params, *options)
