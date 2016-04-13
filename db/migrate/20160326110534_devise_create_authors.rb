@@ -2,7 +2,7 @@ class DeviseCreateAuthors < ActiveRecord::Migration
   def change
     create_table(:authors) do |t|
       ## Database authenticatable
-      t.string :email,              null: false, default: ""
+      # t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
 
       ## Recoverable
@@ -34,7 +34,7 @@ class DeviseCreateAuthors < ActiveRecord::Migration
       t.timestamps null: false
     end
 
-    add_index :authors, :email,                unique: true
+    # add_index :authors, :email,                unique: true
     add_index :authors, :reset_password_token, unique: true
     # add_index :authors, :confirmation_token,   unique: true
     # add_index :authors, :unlock_token,         unique: true
