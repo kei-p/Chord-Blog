@@ -1,3 +1,29 @@
 // Place all the styles related to the Entries controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.entry-preview {
+  background-color: white;
+  border-radius: 0px;
+  border: none;
+  margin: 10px 10px;
+
+  .panel-heading { background-color: white; }
+  .panel-footer { background-color: white; }
+}
+
+.entry-preview_author_name {
+  font-size: 10px;
+}
+
+.chord_body-measure {
+  border-left: 2px solid #CCC;
+}
+
+.chord_body-measure:first-child{
+  border-left: none;
+}
+
+.chord_body-chord {
+  margin: 0px 2px;
+}

@@ -1,32 +1,27 @@
 - model_class = Entry
 .page-header
-  %h1= t '.title', :default => model_class.model_name.human.pluralize.titleize
-%table.table.table-striped
-  %thead
-    %tr
-      %th= model_class.human_attribute_name(:id)
-      %th= model_class.human_attribute_name(:title)
-      %th= model_class.human_attribute_name(:author_id)
-      %th= model_class.human_attribute_name(:created_at)
-      %th= t '.actions', :default => t("helpers.actions")
-  %tbody
-    - @entries.each do |entry|
-      %tr
-        %td= link_to entry.id, entry_path(entry)
-        %td= entry.title
-        %td= entry.author_id
-        %td= entry.created_at
-        - if entry.author == current_author
-          %td
-            = link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_entry_path(entry), :class => 'btn btn-default btn-xs'
-            = link_to t('.destroy', :default => t("helpers.links.destroy")),
-              entry_path(entry),
-              :method => :delete,
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-xs btn-danger'
-
-- if current_author
-  = link_to t('.new', :default => t("helpers.links.new")),
-    new_entry_path,
-    :class => 'btn btn-primary'
+  %h1.container
+    = t '.title', :default => model_class.model_name.human.pluralize.titleize
+    - if current_author
+      = link_to t('.new', :default => t("helpers.links.new")),
+        new_entry_path,
+        :class => 'btn btn-primary pull-right'
+%div.container
+  - @entries.each do |entry|
+    - entry = EntryDecorator.new(entry)
+    %div.panel.panel-default.entry-preview
+      %div.panel-heading
+        %strong= link_to "#{entry.title}", entry_path(entry)
+        %span.pull-right= entry.created_date
+        %br
+        %span.entry-preview_author_name= entry.author.name
+      %div.panel-body
+        = render partial: 'chord_body', locals: { entry: entry, type: :preview }
+      - if entry.author == current_author
+        %div.panel-footer
+          = link_to t('.edit', :default => t("helpers.links.edit")),
+            edit_entry_path(entry), :class => 'btn btn-default btn-xs'
+          = link_to t('.destroy', :default => t("helpers.links.destroy")),
+            entry_path(entry), :method => :delete,
+            :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+            :class => 'btn btn-danger btn-xs'

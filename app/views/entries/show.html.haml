@@ -12,11 +12,11 @@
   %dt
     %strong= model_class.human_attribute_name(:chord_body)
   %dd
-    = render 'chord_body'
+    = render partial: 'chord_body', locals: { entry: @entry, type: :full }
 
+= link_to t('.back', :default => t("helpers.links.back")),
+              entries_path, :class => 'btn btn-default'
 - if @entry.author == current_author
-  = link_to t('.back', :default => t("helpers.links.back")),
-                entries_path, :class => 'btn btn-default'
   = link_to t('.edit', :default => t("helpers.links.edit")),
                 edit_entry_path(@entry), :class => 'btn btn-default'
   = link_to t('.destroy', :default => t("helpers.links.destroy")),

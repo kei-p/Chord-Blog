@@ -1,10 +1,12 @@
-- @entry.chord_body.sections.each do |section|
+- entry.chord_body.sections.each do |section|
   - section = SectionDecorator.new(section)
   %div
-    %p= section.title
-    %div
+    %p
+      %strong= section.title
+    %ul.list-inline
       - section.measures.each do |measure|
-        %span
+        %li.chord_body-measure
           - measure.each do |chord|
-            %span= chord.name
-  = section.player
+            %span.chord_body-chord= chord.name
+  - if type == :full
+    = section.player
