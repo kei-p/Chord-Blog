@@ -17,3 +17,29 @@
 body {
   background-color: #efefef;
 }
+
+#header {
+  border-radius: 0;
+  background-color: black;
+  color: white;
+  opacity: 0.85;
+}
+
+#title {
+  font-family: 'Unica One', cursive;
+}
+
+#header-menu {
+  margin-right: 10px;
+}
+
+#header-menu_btn {
+  border-color: #333;
+  background-color: transparent;
+}
+
+#login-message {
+  color: black;
+  margin: 10px 20px;
+}
+

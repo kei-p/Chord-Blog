@@ -1,9 +1,8 @@
 - model_class = Entry
-.page-header
+
+- if current_author
   %h1.container
-    = t '.title', :default => model_class.model_name.human.pluralize.titleize
-    - if current_author
-      = link_to t('.new', :default => t("helpers.links.new")),
+    = link_to t('.new', :default => t("helpers.links.new")),
         new_entry_path,
         :class => 'btn btn-primary pull-right'
 %div.container
