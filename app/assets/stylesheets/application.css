@@ -29,17 +29,12 @@ body {
   font-family: 'Unica One', cursive;
 }
 
-#header-menu {
-  margin-right: 10px;
-}
-
-#header-menu_btn {
-  border-color: #333;
-  background-color: transparent;
-}
-
 #login-message {
   color: black;
   margin: 10px 20px;
+}
+
+#main {
+  margin-top: 70px;
 }
 

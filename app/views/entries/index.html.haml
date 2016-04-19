@@ -1,10 +1,5 @@
 - model_class = Entry
 
-- if current_author
-  %h1.container
-    = link_to t('.new', :default => t("helpers.links.new")),
-        new_entry_path,
-        :class => 'btn btn-primary pull-right'
 %div.container
   - @entries.each do |entry|
     - entry = EntryDecorator.new(entry)
