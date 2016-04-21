@@ -13,3 +13,28 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+  background-color: #efefef;
+}
+
+#header {
+  border-radius: 0;
+  background-color: black;
+  color: white;
+  opacity: 0.85;
+}
+
+#title {
+  font-family: 'Unica One', cursive;
+}
+
+#login-message {
+  color: black;
+  margin: 10px 20px;
+}
+
+#main {
+  margin-top: 70px;
+}
+

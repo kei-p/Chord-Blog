@@ -9,15 +9,19 @@ class ChordBody
   private
 
   def map
-    @sections = ChordParser.new(body).parse.map do |s|
-      section = Section.new(s[:title])
+    @sections = begin
+      ChordParser.new(body).parse.map do |s|
+        section = Section.new(s[:title])
 
-      s[:measures].each do |m|
-        measure = m.map { |c| Chord.new(c) }
-        section.add_measure(measure)
+        s[:measures].each do |m|
+          measure = m.map { |c| Chord.new(c) }
+          section.add_measure(measure)
+        end
+
+        section
       end
-
-      section
+    rescue
+      []
     end
   end
 end

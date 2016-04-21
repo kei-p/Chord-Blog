@@ -18,7 +18,7 @@
 @import "fontawesome/font-awesome";
 
 // Glyphicons
-//@import "twitter/bootstrap/glyphicons.less";
+@import "twitter/bootstrap/glyphicons.less";
 
 // Your custom LESS stylesheets goes here
 //
@@ -30,3 +30,54 @@
 //
 // Example:
 // @link-color: #ff0000;
+
+.navbar-collapse {
+  display: block !important;
+  height: auto !important;
+  padding-bottom: 0;
+  overflow: visible !important;
+}
+
+.navbar-toggle {
+  display: none;
+}
+
+.navbar-brand {
+  margin-left: -15px;
+}
+
+.navbar-nav {
+  margin: 0px;
+}
+
+.navbar-nav > li {
+  margin-left: 10px;
+  display: inline-block;
+}
+
+.navbar-right .dropdown-menu {
+  left: auto;
+  right: 0;
+}
+
+.navbar-right .btn {
+  background-color: transparent;
+}
+
+.header-button {
+  color: rgba(102, 102, 102, 1.0);
+  &:hover {
+    color: white;
+  }
+}
+
+.navbar-nav .open .dropdown-menu {
+  position: absolute;
+  float: none;
+  width: auto;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.172549) 0px 6px 12px 0px;
+  margin-top: 2px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+

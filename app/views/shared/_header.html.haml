@@ -1,0 +1,21 @@
+%div.navbar.navbar-inverse.navbar-fixed-top{id: 'header'}
+  %div.container-fluid
+    %a.navbar-brand{'id' => 'title', 'href' => '/'}
+      = ChordBlog
+    - if current_author
+      %ul.navbar-nav.navbar-right.pull-right{id: 'hedaer-buttons'}
+        %li.navbar-btn
+          %button.btn.header-button
+            = link_to new_entry_path do
+              %span.glyphicon.glyphicon-pencil
+        %li.navbar-btn
+          %div.dropdown
+            %button.btn.header-button.dropdown-toggle{'data-toggle' => 'dropdown'}
+              %span.glyphicon.glyphicon-user
+            %ul.dropdown-menu
+              %li{id: 'login-message'}
+                = "#{current_author.name}"
+              %li
+                = link_to "Edit Profile", edit_author_registration_path
+              %li
+                = link_to "Log out", destroy_author_session_path, method: :delete
