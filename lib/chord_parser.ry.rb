@@ -2,8 +2,8 @@ class ChordParser
 options no_result_var
 
 rule
-  body      : sections
-              { val[0] }
+  body      : ws sections ws
+              { val[1] }
 
   ws        :
             | ws SPACE
@@ -59,7 +59,7 @@ attr_reader :src
 attr_reader :q
 
 def initialize(obj)
-  @src = obj.is_a?(IO) ? obj.read : obj.to_s
+  @src = obj.is_a?(IO) ? obj.read : obj.to_s + "\n"
   @yydebug = ENV['YYDEBUG'] ? true : false
 end
 

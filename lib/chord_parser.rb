@@ -24,7 +24,7 @@ attr_reader :src
 attr_reader :q
 
 def initialize(obj)
-  @src = obj.is_a?(IO) ? obj.read : obj.to_s
+  @src = obj.is_a?(IO) ? obj.read : obj.to_s + "\n"
   @yydebug = ENV['YYDEBUG'] ? true : false
 end
 
@@ -63,56 +63,58 @@ end
 ##### State transition tables begin ###
 
 racc_action_table = [
-    -2,    -9,    -2,    13,     5,    -2,    -9,    -2,    26,    13,
-    13,    29,    13,    14,    14,    13,    21,    22,   -13,   -13,
-   -12,   -12,   -11,   -11,    12,     5,     6,    13,    13,    13,
-    13 ]
+    -2,    -9,    -2,     5,     3,    -2,    -9,    -2,    28,     5,
+    31,     5,     5,    16,     5,    16,     5,     8,     5,    23,
+    24,   -11,   -11,   -13,   -13,   -12,   -12,     8,     9,     5,
+     5,     5,     5 ]
 
 racc_action_check = [
-    18,    16,    11,    19,     0,    18,    16,    11,    19,     8,
-    23,    23,    20,     8,    23,    15,    15,    15,    24,    24,
-    25,    25,    10,    10,     6,     2,     1,    27,    28,    30,
-    31 ]
+    20,    18,    15,    21,     1,    20,    18,    15,    21,    25,
+    25,    12,    22,    25,     2,    12,    10,     2,    17,    17,
+    17,    14,    14,    26,    26,    27,    27,     4,     3,    29,
+    30,    32,    33 ]
 
 racc_action_pointer = [
-    -1,    26,    20,   nil,   nil,   nil,    24,   nil,     7,   nil,
-    19,     0,   nil,   nil,   nil,    13,     1,   nil,    -2,     1,
-    10,   nil,   nil,     8,    15,    17,   nil,    25,    26,   nil,
-    27,    28 ]
+   nil,     4,    12,    28,    22,   nil,   nil,   nil,   nil,   nil,
+    14,   nil,     9,   nil,    18,     0,   nil,    16,     1,   nil,
+    -2,     1,    10,   nil,   nil,     7,    20,    22,   nil,    27,
+    28,   nil,    29,    30 ]
 
 racc_action_default = [
-   -18,   -18,    -1,    -6,    -2,   -10,   -18,    -7,   -18,    -2,
-    -2,   -14,    32,    -3,    -2,   -18,    -2,    -2,   -15,   -18,
-   -16,    -2,    -2,   -18,    -2,    -2,    -2,    -4,    -8,    -2,
-   -17,    -5 ]
+    -2,   -18,   -18,   -18,    -2,    -3,    -6,    -2,   -10,    34,
+    -1,    -7,   -18,    -2,    -2,   -14,    -2,   -18,    -2,    -2,
+   -15,   -18,   -16,    -2,    -2,   -18,    -2,    -2,    -2,    -4,
+    -8,    -2,   -17,    -5 ]
 
 racc_goto_table = [
-    15,    18,    19,    16,    17,    20,    10,    23,     3,    19,
-     7,     9,    27,    28,     2,    18,    18,    30,    24,    25,
-    31,     1 ]
+     2,     6,    18,    11,    10,    19,    13,     4,     1,    20,
+   nil,   nil,   nil,    17,    14,    21,    22,   nil,    25,   nil,
+    21,    20,    20,    29,    30,    26,    27,   nil,    32,   nil,
+   nil,    33 ]
 
 racc_goto_check = [
-     3,    10,     3,     4,     6,     3,     9,     3,     5,     3,
-     5,     8,     3,     3,     2,    10,    10,     3,     9,     9,
-     3,     1 ]
+     2,     5,     4,     5,     2,     6,     8,     3,     1,    10,
+   nil,   nil,   nil,     2,     9,     2,     2,   nil,     2,   nil,
+     2,    10,    10,     2,     2,     9,     9,   nil,     2,   nil,
+   nil,     2 ]
 
 racc_goto_pointer = [
-   nil,    21,    14,    -9,    -6,     8,    -5,   nil,     7,     2,
-    -9 ]
+   nil,     8,     0,     5,   -11,    -1,    -8,   nil,    -1,     7,
+    -5 ]
 
 racc_goto_default = [
-   nil,   nil,   nil,     8,   nil,   nil,   nil,     4,   nil,   nil,
-    11 ]
+   nil,   nil,    12,   nil,   nil,   nil,   nil,     7,   nil,   nil,
+    15 ]
 
 racc_reduce_table = [
   0, 0, :racc_error,
-  1, 9, :_reduce_1,
-  0, 11, :_reduce_none,
-  2, 11, :_reduce_none,
+  3, 9, :_reduce_1,
+  0, 10, :_reduce_none,
+  2, 10, :_reduce_none,
   3, 12, :_reduce_none,
   4, 12, :_reduce_none,
-  1, 10, :_reduce_6,
-  2, 10, :_reduce_7,
+  1, 11, :_reduce_6,
+  2, 11, :_reduce_7,
   3, 14, :_reduce_none,
   3, 13, :_reduce_9,
   1, 15, :_reduce_10,
@@ -126,7 +128,7 @@ racc_reduce_table = [
 
 racc_reduce_n = 18
 
-racc_shift_n = 32
+racc_shift_n = 34
 
 racc_token_table = {
   false => 0,
@@ -169,8 +171,8 @@ Racc_token_to_s_table = [
   "SOUNDS",
   "$start",
   "body",
-  "sections",
   "ws",
+  "sections",
   "br",
   "section",
   "separator",
@@ -187,7 +189,7 @@ Racc_debug_parser = true
 
 module_eval(<<'.,.,', 'chord_parser.ry.rb', 5)
   def _reduce_1(val, _values)
-     val[0] 
+     val[1] 
   end
 .,.,
 
