@@ -20,7 +20,7 @@
       %h1= @entry.title
     %div.panel-body
       = render partial: 'chord_body', locals: { entry: @entry, type: :full }
-    - if @entry.author == current_author
+    - if @entry.user?(current_user)
       %div.panel-footer
         = link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_entry_path(@entry), :class => 'btn btn-default'

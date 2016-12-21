@@ -1,6 +1,4 @@
-class Author < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:twitter]
@@ -15,8 +13,8 @@ class Author < ActiveRecord::Base
   end
 
   def self.new_with_session(params, session)
-    if session["devise.author_attributes"]
-      new(session["devise.author_attributes"], without_protection: true) do |author|
+    if session["devise.user_attributes"]
+      new(session["devise.user_attributes"], without_protection: true) do |author|
         author.attributes = params
         author.valid?
       end

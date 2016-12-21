@@ -2,7 +2,7 @@
   %div.container-fluid
     %a.navbar-brand{'id' => 'title', 'href' => '/'}
       = ChordBlog
-    - if current_author
+    - if current_user
       %ul.navbar-nav.navbar-right.pull-right{id: 'hedaer-buttons'}
         %li.navbar-btn
           %button.btn.header-button
@@ -14,8 +14,8 @@
               %span.glyphicon.glyphicon-user
             %ul.dropdown-menu
               %li{id: 'login-message'}
-                = "#{current_author.name}"
+                = "#{current_user.name}"
               %li
-                = link_to "Edit Profile", edit_author_registration_path
+                = link_to "Edit Profile", edit_user_registration_path
               %li
-                = link_to "Log out", destroy_author_session_path, method: :delete
+                = link_to "Sign out", destroy_user_session_path, method: :delete

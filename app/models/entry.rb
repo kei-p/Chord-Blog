@@ -1,5 +1,5 @@
 class Entry < ActiveRecord::Base
-  belongs_to :author
+  belongs_to :user
 
   validate :validate_parse_body
 
@@ -11,8 +11,8 @@ class Entry < ActiveRecord::Base
     end
   end
 
-  def author?(author)
-    self.author == author
+  def user?(users)
+    self.user == user
   end
 
   def chord_body

@@ -8,10 +8,10 @@
         %strong= link_to "#{entry.title}", entry_path(entry)
         %span.pull-right= entry.created_date
         %br
-        %span.entry-preview_author_name= entry.author.name
+        %span.entry-preview_author_name= entry.user.name
       %div.panel-body
         = render partial: 'chord_body', locals: { entry: entry, type: :preview }
-      - if entry.author == current_author
+      - if entry.user?(current_user)
         %div.panel-footer
           = link_to t('.edit', :default => t("helpers.links.edit")),
             edit_entry_path(entry), :class => 'btn btn-default btn-xs'
