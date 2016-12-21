@@ -1,7 +1,7 @@
 - entry.chord_body.sections.each do |section|
   - section = SectionDecorator.new(section)
-  %div
-    %p
+  .chord-body__section
+    .chord-body__section-title
       %strong= section.title
     %ul.list-inline
       - section.measures.each do |measure|

@@ -2,21 +2,39 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.entry-preview {
+
+.entry {
   background-color: white;
-  border-radius: 0px;
-  border: none;
   margin: 10px 10px;
+
+  .card-header, .card-footer {
+    border: none;
+  }
 }
 
 .entry-preview__author-name {
   font-size: 10px;
 }
 
+.chord-body__section {
+}
+
+.chord-body__section-title {
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 4px;
+}
+
 .chord-body__measure {
   display: inline-block;
-  border-left: 2px solid #CCC;
-  &:first-child{ border-left: none; }
+  &:not(:last-child):after {
+    content: '|';
+    color: #888;
+  }
+}
+
+.chord_body__measure-divider {
+  display: inline-block;
+  height: 1rem;
 }
 
 .chord-body__chord {
