@@ -1,21 +1,17 @@
-%div.navbar.navbar-inverse.navbar-fixed-top{id: 'header'}
-  %div.container-fluid
-    %a.navbar-brand{'id' => 'title', 'href' => '/'}
+#header.navbar.navbar-inverse.navbar-fixed-top
+  .container-fluid
+    %a.navbar-brand{'href': root_path }
       = ChordBlog
     - if current_user
-      %ul.navbar-nav.navbar-right.pull-right{id: 'hedaer-buttons'}
-        %li.navbar-btn
-          %button.btn.header-button
-            = link_to new_entry_path do
-              %span.glyphicon.glyphicon-pencil
-        %li.navbar-btn
-          %div.dropdown
-            %button.btn.header-button.dropdown-toggle{'data-toggle' => 'dropdown'}
-              %span.glyphicon.glyphicon-user
-            %ul.dropdown-menu
-              %li{id: 'login-message'}
-                = "#{current_user.name}"
-              %li
-                = link_to "Edit Profile", edit_user_registration_path
-              %li
-                = link_to "Sign out", destroy_user_session_path, method: :delete
+      %ul.nav.navbar-nav.pull-right
+        %li.nav-item.mr-1
+          = link_to new_entry_path, class: 'nav-link' do
+            = fa_icon 'pencil'
+        %li.nav-item.dropdown
+          .nav-link.dropdown-toggle{'data-toggle': 'dropdown'}
+            = fa_icon 'user'
+          %ul.dropdown-menu.dropdown-menu-right
+            .dropdown-header= "#{current_user.name}"
+            .dropdown-item
+            = link_to "Edit Profile", edit_user_registration_path, class: 'dropdown-item'
+            = link_to "Sign out", destroy_user_session_path, method: :delete, class: 'dropdown-item text-danger'

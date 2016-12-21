@@ -5,8 +5,8 @@
       %strong= section.title
     %ul.list-inline
       - section.measures.each do |measure|
-        %li.chord_body-measure
+        %li.chord-body__measure
           - measure.each do |chord|
-            %span.chord_body-chord= chord.name
+            %span.chord-body__chord= chord.name
   - if type == :full
     = section.player

@@ -1,21 +1,20 @@
-- model_class = Entry
-
 %div.container
   - @entries.each do |entry|
     - entry = EntryDecorator.new(entry)
-    %div.panel.panel-default.entry-preview
-      %div.panel-heading
+    %div.card
+      %div.card-header
         %strong= link_to "#{entry.title}", entry_path(entry)
         %span.pull-right= entry.created_date
         %br
-        %span.entry-preview_author_name= entry.user.name
-      %div.panel-body
+        %span.entry-preview__author-name= entry.user.name
+      %div.card-block
         = render partial: 'chord_body', locals: { entry: entry, type: :preview }
       - if entry.user?(current_user)
-        %div.panel-footer
-          = link_to t('.edit', :default => t("helpers.links.edit")),
-            edit_entry_path(entry), :class => 'btn btn-default btn-xs'
-          = link_to t('.destroy', :default => t("helpers.links.destroy")),
-            entry_path(entry), :method => :delete,
-            :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-            :class => 'btn btn-danger btn-xs'
+        %div.card-footer
+          .pull-right
+            = link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_entry_path(entry), :class => 'btn btn-default btn-xs'
+            = link_to t('.destroy', :default => t("helpers.links.destroy")),
+              entry_path(entry), :method => :delete,
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger btn-xs'

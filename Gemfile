@@ -16,13 +16,19 @@ gem 'erb2haml'
 gem 'draper'
 
 gem 'therubyracer'
-gem 'less-rails'
-gem 'twitter-bootstrap-rails'
 
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
+
+gem "normalize-rails"
+gem 'bootstrap', '~> 4.0.0.alpha5'
+gem "font-awesome-rails"
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-tether', '>= 1.1.0'
+end
 
 # gem 'bcrypt', '~> 3.1.7'
 

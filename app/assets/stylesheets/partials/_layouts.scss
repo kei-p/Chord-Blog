@@ -1,0 +1,33 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:100);
+
+body {
+  background-color: #efefef;
+}
+
+#header {
+  border-radius: 0;
+  background-color: black;
+  color: white;
+  opacity: 0.85;
+  height: 54px;
+
+  .nav-link, .navbar-brand {
+    color: white;
+    &:hover { opacity: 0.5; }
+  }
+}
+
+.navbar-brand {
+  font-family: 'Raleway', cursive;
+}
+
+#login-message {
+  color: black;
+  margin: 10px 20px;
+}
+
+#main {
+  margin-top: 70px;
+  margin-bottom: 16px;
+}
+

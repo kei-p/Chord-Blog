@@ -7,23 +7,18 @@
   border-radius: 0px;
   border: none;
   margin: 10px 10px;
-
-  .panel-heading { background-color: white; }
-  .panel-footer { background-color: white; }
 }
 
-.entry-preview_author_name {
+.entry-preview__author-name {
   font-size: 10px;
 }
 
-.chord_body-measure {
+.chord-body__measure {
+  display: inline-block;
   border-left: 2px solid #CCC;
+  &:first-child{ border-left: none; }
 }
 
-.chord_body-measure:first-child{
-  border-left: none;
-}
-
-.chord_body-chord {
-  margin: 0px 2px;
+.chord-body__chord {
+  padding: 0 4px;
 }
