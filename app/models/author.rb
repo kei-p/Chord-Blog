@@ -7,7 +7,6 @@ class Author < ActiveRecord::Base
 
   has_many :entries
   validates :name, presence: true, uniqueness: true
-  validate :validates_uid
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |author|
@@ -44,11 +43,5 @@ class Author < ActiveRecord::Base
     else
       super
     end
-  end
-
-  private
-
-  def validates_uid
-    errors.add(:base, 'Invalid registration') unless uid == '4793539213'
   end
 end
