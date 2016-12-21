@@ -21,7 +21,7 @@ class SectionDecorator < Draper::Decorator
   end
 
   def iframe_style
-    "b=4&c=0xFFFFFF&m=d&x=b&s=1&p=on&v=25"
+    "b=4&c=0xFFFFFF&m=d&x=b&s=1&p=off&v=25"
   end
 
   def iframe_sounds

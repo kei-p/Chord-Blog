@@ -39,4 +39,9 @@
 
 .chord-body__chord {
   padding: 0 4px;
+  display: inline-block;
+  &:hover {
+    color: white;
+    background-color: $brand-primary;
+  }
 }

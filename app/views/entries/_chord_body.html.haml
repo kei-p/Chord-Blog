@@ -7,6 +7,7 @@
       - section.measures.each do |measure|
         %li.chord-body__measure
           - measure.each do |chord|
-            %span.chord-body__chord= chord.name
+            %span.chord-body__chord.js-play-chord{'data-chord-sounds': chord.sounds}
+              = chord.name
   - if type == :full
     = section.player
