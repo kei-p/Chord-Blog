@@ -12,6 +12,7 @@ class ChordPlayer
     @ctx = new AudioContext()
     @gainNode = @ctx.createGain()
     @buffer = {}
+    @sounds = []
     @gainNode.gain.value = 0.3
 
   load: ->
@@ -36,9 +37,16 @@ class ChordPlayer
     sound.connect(@gainNode)
     @gainNode.connect(@ctx.destination)
     sound.start(0)
+    @sounds.push(sound)
 
   play: (chord, interval = 0) ->
     duration = 0
+    while @sounds.length
+      v = @sounds.pop()
+      v.stop()
+
+    debugger
+
     $.each chord.toString().split('').slice(0, 6), (i, v) =>
       fret = parseInt(v, 16)
       unless isNaN(fret)
