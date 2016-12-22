@@ -1,0 +1,55 @@
+.chord-progression__section {
+}
+
+.chord-progression__section-title {
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 4px;
+}
+
+.chord-progression__measure {
+  display: inline-block;
+  &:not(:last-child):after {
+    content: '|';
+    color: #888;
+  }
+}
+
+.chord_progression__measure-divider {
+  display: inline-block;
+  height: 1rem;
+}
+
+.chord {
+  padding: 0 4px;
+  display: inline-block;
+  &:hover {
+    .chord__name {
+      border-bottom: 1px solid $brand-primary;
+    }
+  }
+}
+
+.chord__name {
+  padding: 2px 4px;
+  box-sizing: border-box;
+  height: 28px;
+}
+
+.chord__bar {
+  stroke: gray;
+  stroke-width: 4;
+}
+
+.chord__fret-block {
+  stroke: gray;
+  fill: none;
+}
+
+.chord__sound {
+  fill: black;
+
+  &[type=zero] {
+    fill: none;
+    stroke: black
+  }
+}
