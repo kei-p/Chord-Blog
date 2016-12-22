@@ -15,33 +15,3 @@
 .entry-preview__author-name {
   font-size: 10px;
 }
-
-.chord-body__section {
-}
-
-.chord-body__section-title {
-  border-bottom: 1px solid #ccc;
-  margin-bottom: 4px;
-}
-
-.chord-body__measure {
-  display: inline-block;
-  &:not(:last-child):after {
-    content: '|';
-    color: #888;
-  }
-}
-
-.chord_body__measure-divider {
-  display: inline-block;
-  height: 1rem;
-}
-
-.chord-body__chord {
-  padding: 0 4px;
-  display: inline-block;
-  &:hover {
-    color: white;
-    background-color: $brand-primary;
-  }
-}

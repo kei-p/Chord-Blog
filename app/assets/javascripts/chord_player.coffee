@@ -39,7 +39,7 @@ class ChordPlayer
 
   play: (chord, interval = 0) ->
     duration = 0
-    $.each chord.split('').slice(0, 6), (i, v) =>
+    $.each chord.toString().split('').slice(0, 6), (i, v) =>
       fret = parseInt(v, 16)
       unless isNaN(fret)
         string = 6 - i

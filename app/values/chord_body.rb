@@ -20,7 +20,8 @@ class ChordBody
 
         section
       end
-    rescue
+    rescue => e
+      raise e if Rails.env.development?
       []
     end
   end

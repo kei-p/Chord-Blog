@@ -1,0 +1,31 @@
+- fret_width = 30
+
+%span.chord.js-play-chord{'data-chord-sounds': chord.sounds_notation}
+  .chord__name= chord.name
+  .chord__fret
+    - fret_length = [chord.fret_range.size, 3].max
+    - w = (fret_length + 1) * fret_width
+    %svg{view_box: "0 0 #{w} 90", width: w, height: 90}
+      %g{transform: "translate(20, 10)" }
+        - if chord.fret_range.any? { |f| f <= 1 }
+          %line.chord__bar{x1: 0, y1: 0, x2: 0, y2: 50}
+
+        - base_fret = [chord.fret_range.min, 1].max
+        - (0...fret_length).each do |i|
+          %g{transform: "translate(#{fret_width * i}, 0)"}
+            - (0...5).each do |i|
+              %rect.chord__fret-block{y: i * 10, width: fret_width, height: 10}
+
+            %text{x: fret_width * 0.5, y: 6 * 10 + 5, 'font-size': 10, 'text-anchor': 'middle'}
+              #{base_fret + i}
+
+        - chord.sounds.each do |s|
+          %g{transform: "translate(0, #{(s.string - 1) * 10})"}
+            - if s.fret == 0
+              %g{transform: "translate(-10, 0)"}
+                %circle.chord__sound{cx: 0, cy: 0, r: 5, type: 'zero'}
+            - elsif s.fret == nil
+              %g{transform: "translate(-10, 0)"}
+                %path{d: "M -3.5,-3.5 L 3.5,3.5 m -7,0 L 3.5,-3.5 Z", stroke: "#000", fill: "none"}
+            - else
+              %circle.chord__sound{cx: (s.fret - base_fret + 0.5) * fret_width, cy: 0, r: 5}
