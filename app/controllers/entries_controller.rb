@@ -19,7 +19,7 @@ class EntriesController < ApplicationController
 
   def create
     @entry = Entry.new(entry_params)
-    @entry.author = current_user
+    @entry.user = current_user
 
     respond_to do |format|
       if @entry.save

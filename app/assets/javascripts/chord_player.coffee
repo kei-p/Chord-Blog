@@ -45,8 +45,6 @@ class ChordPlayer
       v = @sounds.pop()
       v.stop()
 
-    debugger
-
     $.each chord.toString().split('').slice(0, 6), (i, v) =>
       fret = parseInt(v, 16)
       unless isNaN(fret)
