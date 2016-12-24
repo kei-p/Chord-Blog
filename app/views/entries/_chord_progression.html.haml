@@ -1,10 +1,11 @@
+- type ||= :full
 - entry.chord_body.sections.each do |section|
   - section = SectionDecorator.new(section)
   .chord-progression__section
     .chord-progression__section-title
-      %strong= section.title
+      = section.title
     %ul.list-inline
       - section.measures.each do |measure|
         %li.chord-progression__measure
           - measure.each do |chord|
-            = render 'chord', chord: chord
+            = render 'chord', chord: chord, type: type == :thumbnail ? :no_fret : nil
