@@ -27,3 +27,21 @@
     color: #333;
   }
 }
+
+#entry_body {
+  resize: none;
+}
+
+.entry__preview {
+  margin-bottom: 16px;
+  height: 274px;
+
+  .chord-progression {
+    zoom: 50%;
+    height: 100%;
+    background-color: white;
+    overflow: auto;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    padding: 12px;
+  }
+}

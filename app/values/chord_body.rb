@@ -1,8 +1,9 @@
 class ChordBody
-  attr_reader :sections, :body
+  attr_reader :sections, :body, :errors
 
   def initialize(body)
     @body = body
+    @errors = []
     map
   end
 
@@ -21,7 +22,7 @@ class ChordBody
         section
       end
     rescue => e
-      raise e if Rails.env.development?
+      errors.push e
       []
     end
   end

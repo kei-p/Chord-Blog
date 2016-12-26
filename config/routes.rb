@@ -5,5 +5,9 @@ Rails.application.routes.draw do
                                     registrations: 'users/registrations',
                                     sessions: 'users/sessions' }
 
-  resources :entries
+  resources :entries do
+    collection do
+      post :preview
+    end
+  end
 end
