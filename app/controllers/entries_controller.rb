@@ -52,6 +52,11 @@ class EntriesController < ApplicationController
     end
   end
 
+  def preview
+    chord_body =  ChordBody.new(entry_params[:body])
+    render plain: view_context.render(partial: 'entries/chord_progression', locals: { chord_body: chord_body })
+  end
+
   private
 
   def set_entry

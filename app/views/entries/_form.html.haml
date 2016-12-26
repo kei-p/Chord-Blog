@@ -1,24 +1,29 @@
-= form_for @entry, :html => { :class => "form-horizontal entry" } do |f|
-  - if @entry.errors.any?
-    #error_expl.panel.panel-danger
-      .panel-heading
-        %h3.panel-title
-          = pluralize(@entry.errors.count, "error")
-          prohibited this entry from being saved:
-      .panel-body
-        %ul
-          - @entry.errors.full_messages.each do |msg|
-            %li= msg
+= simple_form_for @entry, html: { class: 'card p-1' } do |f|
+  = f.error_notification
+
   .form-group
-    = f.label :title, :class => 'control-label col-lg-2'
-    .col-lg-10
-      = f.text_field :title, :class => 'form-control'
-  .form-group
-    = f.label :body, :class => 'control-label col-lg-2'
-    .col-lg-10
-      = f.text_area :body, :class => 'form-control', :rows => '10'
-  .form-group
-    .col-lg-offset-2.col-lg-10
-      = f.submit nil, :class => 'btn btn-primary'
-      = link_to t('.cancel', :default => t("helpers.links.cancel")),
-        entries_path, :class => 'btn btn-default'
+    = f.input :title
+  %ul.nav.nav-tabs{role: 'tablist'}
+    %li.nav-item
+      = link_to '#edit', class: 'nav-link active', data: { toggle: 'tab', role: 'tab'  } do
+        = fa_icon 'pencil-square-o'
+        Edit
+
+    %li.nav-item
+      = link_to '#preview', class: 'nav-link js-preview',
+                            data: { toggle: 'tab', role: 'tab',
+                              'preview-url': polymorphic_path([:preview, :entries]), 'preview-model': 'entry',
+                              'preview-input': '#entry_body', 'preview-body': '#entry-preview' } do
+        = fa_icon 'eye'
+        Preview
+
+  .tab-content
+    #edit.tab-pane.active{role: 'tabpanel'}
+      = f.input :body, input_html: { rows: 16, class: 'mono' }, label: false
+    #preview.tab-pane.active{role: 'tabpanel'}
+      #entry-preview.preview
+
+  .clearfix
+    .pull-left
+      = link_to t('.cancel', :default => t("helpers.links.cancel")), entries_path, class: 'btn btn-default'
+      = f.submit class: 'btn btn-primary'

@@ -8,7 +8,7 @@
         %span -
         %span.entry__date= @entry.created_at.to_s(:date)
     .card-block
-      = render 'chord_progression', entry: @entry
+      = render 'chord_progression', chord_body: @entry.chord_body
     - if @entry.user?(current_user)
       .card-footer
         .pull-right

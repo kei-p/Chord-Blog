@@ -11,6 +11,7 @@ gem 'coffee-rails', '~> 4.1.0'
 
 gem 'devise'
 gem 'omniauth-twitter'
+gem 'simple_form'
 
 gem 'haml'
 gem 'erb2haml'

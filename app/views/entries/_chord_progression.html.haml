@@ -1,11 +1,12 @@
 - type ||= :full
-- entry.chord_body.sections.each do |section|
-  - section = SectionDecorator.new(section)
-  .chord-progression__section
-    .chord-progression__section-title
-      = section.title
-    %ul.list-inline
-      - section.measures.each do |measure|
-        %li.chord-progression__measure
-          - measure.each do |chord|
-            = render 'chord', chord: chord, type: type == :thumbnail ? :no_fret : nil
+.chord-progression
+  - chord_body.sections.each do |section|
+    - section = SectionDecorator.new(section)
+    .chord-progression__section{ class: type == :thumbnail ? 'col-lg-6' : '' }
+      .chord-progression__section-title
+        = section.title
+      %ul.list-inline
+        - section.measures.each do |measure|
+          %li.chord-progression__measure
+            - measure.each do |chord|
+              = render 'chord', chord: chord, type: type == :thumbnail ? :no_fret : nil

@@ -39,11 +39,14 @@ class ChordPlayer
     sound.start(0)
     @sounds.push(sound)
 
-  play: (chord, interval = 0) ->
-    duration = 0
+  stop: () ->
     while @sounds.length
       v = @sounds.pop()
       v.stop()
+
+  play: (chord, interval = 0) ->
+    duration = 0
+    @.stop()
 
     $.each chord.toString().split('').slice(0, 6), (i, v) =>
       fret = parseInt(v, 16)
