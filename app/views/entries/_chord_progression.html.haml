@@ -1,5 +1,10 @@
 - type ||= :full
 .chord-progression
+  - if chord_body.errors.present?
+    .alert.alert-danger
+      .alert-heading
+        = chord_body.errors.first
+
   - chord_body.sections.each do |section|
     - section = SectionDecorator.new(section)
     .chord-progression__section{ class: type == :thumbnail ? 'col-lg-6' : '' }

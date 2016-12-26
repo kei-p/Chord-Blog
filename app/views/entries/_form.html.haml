@@ -1,25 +1,57 @@
+:coffee
+  $ ->
+    update = () ->
+      body = $('#entry_body').val()
+      url = "#{polymorphic_path([:preview, :entries])}"
+      params = {}
+      params['entry'] = {
+        body: body
+      }
+      $.ajax
+        type: 'POST'
+        url: url
+        data: params
+        dataType: 'text'
+        success: (html) => $('.entry__preview').html(html)
+        error: (error) => console.log(error)
+
+    timer = null
+    $('#entry_body').focus () -> timer = setInterval update, 2000
+      .blur () -> clearTimout(timer)
+
+
 = simple_form_for @entry, html: { class: 'card p-1' } do |f|
   = f.error_notification
 
   .form-group
     = f.input :title
-  %ul.nav.nav-tabs{role: 'tablist'}
-    %li.nav-item
-      = link_to '#edit', class: 'nav-link active', data: { toggle: 'tab', role: 'tab'  } do
-        = fa_icon 'pencil-square-o'
-        Edit
 
-    %li.nav-item
-      = link_to '#preview', class: 'nav-link js-preview',
-                            data: { toggle: 'tab', role: 'tab',
-                              'preview-url': polymorphic_path([:preview, :entries]), 'preview-model': 'entry',
-                              'preview-input': '#entry_body', 'preview-body': '#entry-preview' } do
-        = fa_icon 'eye'
-        Preview
+  .form-group
+    .row
+      .col-lg-6
+        = f.input :body, input_html: { rows: 16, class: 'mono' }, label: false
 
-  .tab-content
-    #edit.tab-pane.active{role: 'tabpanel'}
-      = f.input :body, input_html: { rows: 16, class: 'mono' }, label: false
+      .col-lg-6
+        .entry__preview
+          = render 'chord_progression', chord_body: @entry.chord_body
+
+  -# %ul.nav.nav-tabs{role: 'tablist'}
+  -#   %li.nav-item
+  -#     = link_to '#edit', class: 'nav-link active', data: { toggle: 'tab', role: 'tab'  } do
+  -#       = fa_icon 'pencil-square-o'
+  -#       Edit
+  -#
+  -#   %li.nav-item
+  -#     = link_to '#preview', class: 'nav-link js-preview',
+  -#                           data: { toggle: 'tab', role: 'tab',
+  -#                             'preview-url': polymorphic_path([:preview, :entries]), 'preview-model': 'entry',
+  -#                             'preview-input': '#entry_body', 'preview-body': '#entry-preview' } do
+  -#       = fa_icon 'eye'
+  -#       Preview
+
+  -# .tab-content
+  -#   #edit.tab-pane.active{role: 'tabpanel'}
+  -#     = f.input :body, input_html: { rows: 16, class: 'mono' }, label: false
     #preview.tab-pane.active{role: 'tabpanel'}
       #entry-preview.preview
 
