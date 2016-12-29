@@ -1,10 +1,10 @@
 - fret_width = 30
 
 %span.chord.js-play-chord{'data-chord-sounds': chord.sounds_notation}
-  .chord__name= chord.name
+  %span.chord__name= chord.name
   - unless type == :no_fret
     .chord__fret
-      - fret_length = [chord.fret_range.size, 3].max
+      - fret_length = [chord.fret_range.size - 1, 3].max
       - w = (fret_length + 1) * fret_width
       %svg{view_box: "0 0 #{w} 90", width: w, height: 90}
         %g{transform: "translate(20, 10)" }

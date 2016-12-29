@@ -3,8 +3,9 @@
     - entry = EntryDecorator.new(entry)
     .card.entry
       .card-header
-        .entry__title= link_to "#{entry.title}", entry_path(entry)
-        %div
-          %span.entry__author-name= entry.user.name
-      .card-block
+        %span.entry__title= link_to "#{entry.title}", entry_path(entry)
+        .pull-right.text-xs-right
+          .entry__author-name= entry.user.name
+          .entry__date= entry.created_at.to_s(:date)
+      .card-block.entry__block
         = render 'chord_progression', chord_body: entry.chord_body, type: :thumbnail

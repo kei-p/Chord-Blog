@@ -4,13 +4,15 @@
 .chord-progression__section-title {
   border-bottom: 1px solid #ccc;
   margin-bottom: 4px;
+  font-weight: 500;
 }
 
 .chord-progression__measure {
   display: inline-block;
-  &:not(:last-child):after {
+  &:not(:last-child):before {
     content: '|';
-    color: #888;
+    color: #ddd;
+    float: right;
   }
 }
 
@@ -22,17 +24,20 @@
 .chord {
   padding: 0 4px;
   display: inline-block;
+
   &:hover {
     .chord__name {
-      border-bottom: 1px solid $brand-primary;
+      background-color: $brand-primary;
+      color: white;
     }
   }
 }
 
 .chord__name {
-  padding: 2px 4px;
+  padding: 4px 6px;
   box-sizing: border-box;
   height: 28px;
+  font-weight: 100;
 }
 
 .chord__bar {

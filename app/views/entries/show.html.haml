@@ -2,23 +2,22 @@
 .container
   .card.entry
     .card-header
-      .entry__title= @entry.title
-      %div
-        %span.entry__author-name= @entry.user.name
-        %span -
-        %span.entry__date= @entry.created_at.to_s(:date)
-    .card-block
+      %span.entry__title= @entry.title
+      .pull-right.text-xs-right
+        .entry__author-name= @entry.user.name
+        .entry__date= @entry.created_at.to_s(:date)
+    .card-block.entry__block
       = render 'chord_progression', chord_body: @entry.chord_body
     - if @entry.user?(current_user)
       .card-footer
         .pull-right
-          = link_to t('.edit', :default => t("helpers.links.edit")),
-                        edit_entry_path(@entry), :class => 'btn btn-default'
-          = link_to t('.destroy', :default => t("helpers.links.destroy")),
+          = link_to t('.edit', default: t("helpers.links.edit")),
+                        edit_entry_path(@entry), class: 'btn btn-default'
+          = link_to t('.destroy', default: t("helpers.links.destroy")),
                         entry_path(@entry),
-                        :method => 'delete',
-                        :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                        :class => 'btn btn-danger'
+                        method: 'delete',
+                        data: { confirm: t('.confirm', default: t("helpers.links.confirm", default: 'Are you sure?')) },
+                        class: 'btn btn-danger'
 
-  = link_to t('.back', :default => t("helpers.links.back")),
-                entries_path, :class => 'btn btn-default'
+  = link_to t('.back', default: t("helpers.links.back")),
+                entries_path, class: 'btn btn-link'
