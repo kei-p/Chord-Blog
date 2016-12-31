@@ -15,6 +15,16 @@
 #
 # and, you'll have to watch "config/Guardfile" instead of "Guardfile"
 
+guard :shell do
+  watch('lib/chord_parser.ry.rb') { |m| `bin/rake chord_parser:generate` }
+end
+
+guard :rspec, cmd: 'rspec' do
+  watch(%r{^spec/.+_spec\.rb$})
+  watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
+  watch('spec/spec_helper.rb')  { "spec" }
+end
+
 guard 'livereload' do
   extensions = {
     css: :css,

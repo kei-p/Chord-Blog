@@ -57,5 +57,7 @@ group :development do
   gem 'factory_girl_rails'
 
   gem 'guard-livereload'
+  gem 'guard-shell'
+  gem 'guard-rspec'
 end
 

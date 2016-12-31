@@ -2,27 +2,24 @@ class ChordParser
 options no_result_var
 
 rule
-  body      : ws sections ws
-              { val[1] }
-
-  ws        :
-            | ws SPACE
-
-  br        : ws BREAKLINE ws
-            | br ws BREAKLINE ws
+  body      : sections
+              { val[0] }
 
   sections  : section
               { [ val[0] ]  }
             | sections section
               { val[0] << val[1] }
 
-  separator : ws SEPARATOR ws
+  separator : SEPARATOR
+
+  br        : BREAKLINE
+            | br BREAKLINE
 
   section   : title measures br
               { { title: val[0], measures: val[1]} }
 
   title     : TITLE
-              { val[0].strip }
+              { val[0] }
 
   measures  : chords
               { [ val[0] ] }
@@ -36,10 +33,10 @@ rule
             | chords chord
               { val[0] << val[1] }
 
-  chord     : ws CHORD ws
-              { { name: val[1], sounds: nil } }
-            | chord ws SOUNDS ws
-              { val[0][:sounds] = val[2]; val[0] }
+  chord     : CHORD
+              { { name: val[0], sounds: nil } }
+            | chord SOUNDS
+              { val[0][:sounds] = val[1]; val[0] }
 end
 
 ---- header
@@ -49,10 +46,10 @@ require 'strscan'
 ---- inner
 
 R_SEPARATOR  = /\A\|/
-R_SPACE      = /\A[ ]+/
-R_BREAKLINE  = /\A(\r\n|\r|\n)/
-R_CHORD      = /\A[A-Ga-g][b#]?[Mm769]*(\([#b\d]+\))?/
-R_SOUNDS     = /\A{([0-9a-cn]{6})}/
+R_SPACE      = /\A[\s]+/
+R_BREAKLINE  = /\A[\r\n]+/
+R_CHORD      = /\A([^|\n\r{}]+)(?:\{([0-9a-nx]{6})\})?/
+# R_SOUNDS     = /\A{([0-9a-cn]{6})}/
 R_TITLE      = /\A([^:\n\r]+):(\r\n|\r|\n)/
 
 attr_reader :src
@@ -71,18 +68,16 @@ def parse
   until @s.eos?
     if (piece = @s.scan R_TITLE)
       m = piece.match(R_TITLE)
-      @q << [:TITLE, m[1]]
+      @q << [:TITLE, m[1].strip]
     elsif(piece = @s.scan R_SEPARATOR)
-      @q << [:SEPARATOR, piece]
-    elsif (piece = @s.scan R_SPACE)
-      @q << [:SPACE, piece]
+      @q << [:SEPARATOR, nil]
     elsif (piece = @s.scan R_BREAKLINE)
-      @q << [:BREAKLINE, piece]
+      @q << [:BREAKLINE, nil]
+    elsif (piece = @s.scan R_SPACE)
     elsif (piece = @s.scan R_CHORD)
-      @q << [:CHORD, piece]
-    elsif (piece = @s.scan R_SOUNDS)
-      m = piece.match(R_SOUNDS)
-      @q << [:SOUNDS, m[1]]
+      m = piece.match(R_CHORD)
+      @q << [:CHORD, m[1].strip]
+      @q << [:SOUNDS, m[2]] if m[2]
     else
       raise "Error at #{@s.pos} \"#{src[@s.pos]}\""
     end
